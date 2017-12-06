@@ -1,0 +1,36 @@
+﻿@model List<BPVirtualRun.Models.Campanha>
+@{
+    ViewBag.Title = "Corridas Ativas";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="col-md-6 col-md-offset-3">
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("/ Área do Atleta", "Index", "AreaAtleta", new { @class = "active" })</li>
+            <li class="active">Corridas Ativas</li>
+        </ol>
+    </div>
+    @foreach (var c in Model)
+    {
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <br />
+                <h3 class="center">@c.Nome</h3>
+                <h4 class="center">
+                    Modalidades:
+                    @if (c.is5KM)
+                    { <span>5KM</span> }
+                    @if (c.is10KM)
+                    { <span>10KM</span> }
+                    @if (c.is15KM)
+                    { <span>15KM</span> }
+                    <br />
+                </h4><br />
+                <h4 class="center">@Html.ActionLink("Inscreva-se", "InscricaoModalidades", "AreaAtleta", new { idCampanha = c.Id }, new { @class = "btn-link" })</h4>
+                <br />
+            </div>
+        </div>
+    }
+</div>
+

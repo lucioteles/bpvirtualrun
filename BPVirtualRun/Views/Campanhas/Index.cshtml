@@ -1,0 +1,160 @@
+﻿@model List<BPVirtualRun.Models.Campanha>
+@{
+    ViewBag.Title = "Campanhas";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">*@
+            @if (Model.Count() == 0)
+            {
+                <div class="alert alert-warning" role="alert">Nenhuma campanha cadastrada até o momento!</div>
+            }
+            else
+            {
+                @*<div class="row">
+                        @foreach(var c in Model)
+                        {
+                            <div class="col-md-5">
+                                <div class="panel panel-primary">
+                                    <div class="panel-body">
+                                        <h3 class="center">@c.Nome</h3>
+                                        Criado em @c.Criacao.Value.ToString("dd/MM/yyyy")<br />
+                                        Inscrições de @c.InicioInscricao.ToString("dd/MM/yyyy") a @c.FimInscricao.ToString("dd/MM/yyyy")<br />
+                                        Entre @c.MinimoInscritos a @c.MaximoInscritos inscritos<br />
+                                        Valor: @String.Format("{0:c}", c.ValorInscricao)<br />
+                                        Modalidades:
+                                        @if (c.is5KM) { <span>5KM</span> }
+                                        @if (c.is10KM)
+                                        { <span>10KM</span> }
+                                        @if (c.is15KM)
+                                        { <span>15KM</span> }
+                                        <br />
+                                        <button type="button" class="btn btn-link pull-right">Editar >></button><button type="button" class="btn btn-danger btn-link pull-right">Excluir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>*@
+                <table id="tblCampanhas" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Corrida</th>
+                            <th>Criado em</th>
+                            <th>Período</th>
+                            <th>Inscritos</th>
+                            <th>Valor</th>
+                            <th>Modalidades</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model)
+                        {
+                            <tr>
+                                @*<td>@c.Nome</td>*@
+                                <td>@Html.ActionLink(c.Nome, "Detalhar", new { idCampanha  = c.Id})</td>
+                                <td>@c.Criacao.Value.ToString("dd/MM/yyyy")</td>
+                                <td>@c.InicioInscricao.ToString("dd/MM/yyyy") a @c.FimInscricao.ToString("dd/MM/yyyy")</td>
+                                <td>@c.MinimoInscritos a @c.MaximoInscritos</td>
+                                <td>@String.Format("{0:c}", c.ValorInscricao)</td>
+                                <td>
+                                    @if (c.is5KM)
+                                { <span>5KM</span> }
+                                @if (c.is10KM)
+                                { <span>10KM</span> }
+                                @if (c.is15KM)
+                                { <span>15KM</span> }
+                            </td>
+                            <td>
+                                @*<button type="button" class="btn btn-link pull-right">Editar >></button><button type="button" class="btn btn-danger btn-link pull-right">Excluir</button>*@
+                                <a href="#" class="btn-link alert-danger" onclick="Excluir(@c.Id)">Excluir>></a>@*&nbsp;<a href="#" class="btn-link alert-info" onclick="Editar(@c.Id)">Editar>></a>*@
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            @using (Html.BeginForm("Nova", "Campanhas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <button type="submit" class="btn btn-default navbar-btn">Nova Campanha</button>
+            }
+        @*</div>
+    </div>
+</div>*@
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#tblCampanhas").DataTable({
+                "language": {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                }
+            });
+        })
+
+        function Excluir(id)
+        {
+            $.ajax({
+                url: '@Url.Action("Excluir")',
+                dataType: 'json',
+                data: { idCampanha: id },
+                success: function (items) {
+                    //pararCarregando();
+                    //console.log('salvou');
+                    exibirModal("SUCESSO!", "Registro excluído com sucesso!");
+                },
+                failure: function (response) {
+                    exibirModal("ERRO!", response);
+                    //pararCarregando();
+                }
+            });
+
+
+            @*$.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '@Url.Action("Excluir")',
+                data: { idCampanha: id },
+                success: function (items) {
+                    //pararCarregando();
+                    //console.log('salvou');
+                    exibirModal("SUCESSO!", items.toString() + " registros foram salvos com sucesso!");
+                },
+                failure: function (response) {
+                    //console.log('deu erro');
+                    exibirModal("ERRO!", response);
+                    //pararCarregando();
+                }
+            });*@
+    }
+
+    function Editar(id) {
+        alert(id);
+    }
+    </script>
+
+}

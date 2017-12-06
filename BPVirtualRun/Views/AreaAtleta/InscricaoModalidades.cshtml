@@ -1,0 +1,118 @@
+﻿@model BPVirtualRun.Models.ViewModels.AtletaVM
+@{
+    ViewBag.Title = Model.Campanha.Nome;
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+@using (Html.BeginForm("Inscrever", "AreaAtleta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-md-10 col-md-offset-1">
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Área do Atleta", "Index", "AreaAtleta")</li>
+            <li>@Html.ActionLink("Corridas Ativas", "CorridasAtivas", "AreaAtleta")</li>
+            <li class="active">Inscrições</li>
+        </ol>
+        @Html.HiddenFor(x => x.Inscricao.IdAtleta)
+        @Html.HiddenFor(x => x.Inscricao.IdCampanha)
+        <h2 class="center">@Model.Campanha.Nome</h2>
+        <h4 class="center">Inscrição: @String.Format("{0:c}", Model.Campanha.ValorInscricao)</h4><br /><br />
+        <h3>Modalidades:</h3><br />
+        @if (Model.Campanha.is5KM)
+        {
+            <div class="col-md-2">
+                <h3 class="center">5KM</h3>
+            </div>
+            <div class="col-md-2">
+                @*<input type="checkbox" id="cbk5KM" name="Inscricoes.is5KM" onclick="marcar(@Model.Campanha.ValorInscricao)" />*@
+                @Html.CheckBoxFor(x => x.Inscricao.is5KM, new { @onclick = "marcar()" })
+            </div>
+        }
+        @if (Model.Campanha.is10KM)
+        {
+            <div class="col-md-2">
+                <h3 class="center">10KM</h3>
+            </div>
+            <div class="col-md-2">
+                @*<input type="checkbox" id="cbk10KM" name="Inscricoes.is10KM" onclick="marcar(@Model.Campanha.ValorInscricao)" />*@
+                @Html.CheckBoxFor(x => x.Inscricao.is10KM, new { @onclick = "marcar();" })
+            </div>
+        }
+        @if (Model.Campanha.is15KM)
+        {
+            <div class="col-md-2">
+                <h3 class="center">15KM</h3>
+            </div>
+            <div class="col-md-2">
+                @*<input type="checkbox" id="cbk15KM" name="Inscricoes.is15KM" onclick="marcar(@Model.Campanha.ValorInscricao)" />*@
+                @Html.CheckBoxFor(x => x.Inscricao.is15KM, new { @onclick = "marcar();" })
+            </div>
+        }
+        <br clear="all" />
+        <hr />
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <b>Total a pagar: </b><span id="lblTotal">0</span>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success pull-right" style="display:none" id="btnInscricao" data-toggle="modal" data-target="#modalRegulamento">Me inscrever</button>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="modalRegulamento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">REGULAMENTO</h4>
+            </div>
+            <div class="modal-body">
+                1. A 1ª Etapa da Corrida e Caminhada Solidaria, será realizada dia XX de Dezembro de 2018 na estrada do Beach park.
+                <br />
+                2. A largada da Corrida e Caminhada Solidaria será as 9:00H, no Portal de entrada do Beach Park.
+                <br />
+                3. Poderão participar da Corrida e Caminhada atletas de ambos os sexos, regularmente inscritos de acordo com o Regulamento da prova.
+                <br />
+                4. A Corrida e Caminhada Solidaria será disputada nas distâncias de 5km, 10km e 15 Km de Corrida, o percurso será divulgado no site e no Manual de Informações.
+                <br />
+                5. No ato da inscrição, o participante aceita todos os termos do regulamento e assume total responsabilidade por sua participação na Corrida e Caminhada Solidária.
+                <br />
+                6. As inscrições somente serão realizadas pelo site https://xxxxxxxxxxxxxxxx, inscrição nas categorias 5km, 10km e 15km.
+                Valor da Inscrição: 100,00
+                <br />
+                7. As inscrições serão encerradas no dia 10 de Dezembro de 2018 ou em data anterior a esta, caso seja atingido o limite de 1000 (Mil) participantes.
+                <br />
+                8. Os numerais dos atletas são por ordem de inscrição.
+                <br />
+                9. O kit de CORRIDA será composto por um número de peito.
+                <br />
+                10. A premiação será uma medalha, após a confirmação no site, da conclusão da corrida.
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Aceitar</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+        });
+
+        function marcar()
+        {
+            var valor = parseInt(@Model.Campanha.ValorInscricao);
+            var checkados = $(":checkbox:checked").length;
+            var total = valor * checkados;
+
+            $("#lblTotal").html("R$ " + total.toLocaleString('pt-BR'));
+            if (checkados > 0)
+                $("#btnInscricao").css('display', 'inline');
+            else
+                $("#btnInscricao").css('display', 'none');
+        }
+    </script>    
+}

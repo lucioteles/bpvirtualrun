@@ -1,0 +1,57 @@
+﻿@model BPVirtualRun.Models.ViewModels.AtletaVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.Campanha.Nome</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .imagens {
+            height: auto;
+            width: auto;
+            max-width: 100px;
+            max-height: 100px;
+        }
+        .numeracao {
+            font-size: 1000%;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="row">
+            <div class="col-md-12">
+                <br clear="all" />
+                <h2 class="center">@Model.Atleta.Nome</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br clear="all" />
+                <h3 class="center">@Model.Campanha.Nome</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 center">
+                <br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" />
+                @*<h2 class="center">@Model.Inscricao.Id.ToString("0000")</h2>*@
+                <span class="numeracao">@Model.Inscricao.Id.ToString("0000")</span>
+                <br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 center">
+                <br clear="all" />
+                <img src="~/imagens/logoP.png" class="imagens" />&nbsp;&nbsp;<img src="~/imagens/logoIncor123.png" class="imagens" />&nbsp;&nbsp;<img src="~/imagens/logoIvia123.png" class="imagens"  />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

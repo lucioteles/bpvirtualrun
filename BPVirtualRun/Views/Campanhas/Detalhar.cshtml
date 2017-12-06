@@ -1,0 +1,46 @@
+﻿@model List<BPVirtualRun.Models.ViewModels.DetalheCampanhaVM>
+@{
+    ViewBag.Title = "Detalhar";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+<div class="col-md-10 col-md-offset-1">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Atleta</th>
+                <th>Endereço</th>
+                <th>KMs</th>
+                <th>Medalhas</th>
+                <th>Pagou</th>
+                <th>Modalidades</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var det in Model)
+            {
+                <tr>
+                    <td>@det.NumeroPeito</td>
+                    <td>@det.NomeAtleta</td>
+                    <td>@det.Endereco</td>
+                    <td>@det.KMCorridos</td>
+                    <td>@det.QtdeMedalhas</td>
+                    <td>@String.Format("{0:c}", det.ValorPago)</td>
+                    <td>@det.Modalidades</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Download", "Campanhas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <button type="submit">Download</button>
+                    }
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+

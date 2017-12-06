@@ -1,0 +1,102 @@
+﻿@model BPVirtualRun.Models.ViewModels.AtividadeVM
+@{
+    ViewBag.Title = "Registrar Atividade";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+@if (ViewBag.Erro != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>@ViewBag.Erro</div>
+}
+@if (ViewBag.Sucesso != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>@ViewBag.Sucesso</div>
+}
+
+<div class="col-md-8 col-md-offset-2">
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Área do Atleta", "Index", "AreaAtleta")</li>
+        <li>@Html.ActionLink("Minhas Corridas", "MinhasCorridas", "AreaAtleta")</li>
+        <li class="active">Registrar Atividade</li>
+    </ol>
+    @if (Model.Inscricao.is5KM)
+    {
+        using (Html.BeginForm("RegistrarAtividade", "AreaAtleta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="hidden" name="Atividade.IdInscricao" value="@Model.Inscricao.Id" />
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">Modalidade 5KM<input type="hidden" name="Atividade.Distancia" id="distancia5" value="5" /></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">Data:</div>
+                        <div class="col-md-4"><input type="date" name="Atividade.DataRegistro" id="dtRegistro5" class="form-control" /></div>
+                        <div class="col-md-2">Duração:</div>
+                        <div class="col-md-4"><input type="time" name="Atividade.Tempo" id="tempo5" class="form-control" /></div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-md-2">Local/Evento:</div>
+                        <div class="col-md-10"><input type="text" name="Atividade.LocalEvento" id="local5" class="form-control" /></div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        }
+    }
+    @if (Model.Inscricao.is10KM)
+    {
+        using (Html.BeginForm("RegistrarAtividade", "AreaAtleta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="hidden" name="Atividade.IdInscricao" value="@Model.Inscricao.Id" />
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">Modalidade 10KM<input type="hidden" name="Atividade.Distancia" id="distancia10" value="10" /></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">Data:</div>
+                        <div class="col-md-4"><input type="date" name="Atividade.DataRegistro" id="dtRegistro10" class="form-control" /></div>
+                        <div class="col-md-2">Duração:</div>
+                        <div class="col-md-4"><input type="time" name="Atividade.Tempo" id="tempo10" class="form-control" /></div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-md-2">Local/Evento:</div>
+                        <div class="col-md-10"><input type="text" name="Atividade.LocalEvento" id="local10" class="form-control" /></div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        }
+    }
+    @if (Model.Inscricao.is15KM)
+    {
+        using (Html.BeginForm("RegistrarAtividade", "AreaAtleta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="hidden" name="Atividade.IdInscricao" value="@Model.Inscricao.Id" />
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">Modalidade 15KM<input type="hidden" name="Atividade.Distancia" id="distancia15" value="15" /></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">Data:</div>
+                        <div class="col-md-4"><input type="date" name="Atividade.DataRegistro" id="dtRegistro15" class="form-control" /></div>
+                        <div class="col-md-2">Duração:</div>
+                        <div class="col-md-4"><input type="time" name="Atividade.Tempo" id="tempo15" class="form-control" /></div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-md-2">Local/Evento:</div>
+                        <div class="col-md-10"><input type="text" name="Atividade.LocalEvento" id="local15" class="form-control" /></div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+

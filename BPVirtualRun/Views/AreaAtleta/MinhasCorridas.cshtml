@@ -1,0 +1,128 @@
+﻿@model BPVirtualRun.Models.ViewModels.AtletaVM
+@{
+    ViewBag.Title = "Minhas Corridas";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+<div class="col-md-6 col-md-offset-3">
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("/ Área do Atleta", "Index", "AreaAtleta", new { @class = "active" })</li>
+        <li class="active">Minhas Corridas</li>
+    </ol>
+</div>
+@Html.HiddenFor(x => x.Atleta.Id)
+<div class="col-md-12">
+    @foreach (var i in Model.Inscricoes)
+    {
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <br />
+                <h3 class="center">@i.NomeCampanha</h3>
+                <h4 class="center">
+                    Modalidades:
+                    @if (i.is5KM)
+                    { <span>5KM</span> }
+                    @if (i.is10KM)
+                    { <span>10KM</span> }
+                    @if (i.is15KM)
+                    { <span>15KM</span> }
+                    <br />
+                </h4><br />
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.ActionLink("Registrar Atividade", "RegistrarAtividade", "AreaAtleta", new { id = i.Id }, new { @class = "btn-link" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.ActionLink("Imprimir Número do Peito", "ImprimirNumeroPeito", "AreaAtleta", new { idInscricao = i.Id }, new { @class = "btn-link, pull-right", @target = "_blank" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            @*<div class="modal fade" id="modalAtividade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">REGISTRAR ATIVIDADE</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-md-12">
+                                    <h4 class="center">@i.NomeCampanha</h4>
+                                    @if (i.is5KM)
+                                    {
+                                        <br />
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Modalidade 5KM</div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-2">Data:</div>
+                                                    <div class="col-md-4"><input type="date" name="Data5KM" class="form-control" /></div>
+                                                    <div class="col-md-2">Duração:</div>
+                                                    <div class="col-md-4"><input type="time" name="Tempo5KM" class="form-control" /></div>
+                                                </div><br />
+                                                <div class="row">
+                                                    <div class="col-md-2">Local/Evento:</div>
+                                                    <div class="col-md-10"><input type="text" name="Local5KM" class="form-control" /></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (i.is10KM)
+                                    {
+                                        <br />
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Modalidade 10KM</div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-2">Data:</div>
+                                                    <div class="col-md-4"><input type="date" name="Data10KM" class="form-control" /></div>
+                                                    <div class="col-md-2">Duração:</div>
+                                                    <div class="col-md-4"><input type="time" name="Tempo10KM" class="form-control" /></div>
+                                                </div><br />
+                                                <div class="row">
+                                                    <div class="col-md-2">Local/Evento:</div>
+                                                    <div class="col-md-10"><input type="text" name="Local10KM" class="form-control" /></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (i.is15KM)
+                                    {
+                                        <br />
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Modalidade 15KM</div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-2">Data:</div>
+                                                    <div class="col-md-4"><input type="date" name="Data15KM" class="form-control" /></div>
+                                                    <div class="col-md-2">Duração:</div>
+                                                    <div class="col-md-4"><input type="time" name="Tempo15KM" class="form-control" /></div>
+                                                </div><br />
+                                                <div class="row">
+                                                    <div class="col-md-2">Local/Evento:</div>
+                                                    <div class="col-md-10"><input type="text" name="Local15KM" class="form-control" /></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+    }
+</div>
+
+@section Scripts
+{
+    <script>
+        function RegistrarAtividade(atvidade) {
+            alert(atividade);
+        }
+    </script>
+}

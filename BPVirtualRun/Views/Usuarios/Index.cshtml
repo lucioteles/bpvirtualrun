@@ -1,0 +1,43 @@
+﻿@*@model BPVirtualRun.Models.Usuarios*@
+@model BPVirtualRun.Models.ViewModels.AtletaVM
+@{
+    ViewBag.Title = "Inscrições";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+@if (ViewBag.Erro != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>@ViewBag.Erro</div>
+}
+<div class="col-md-6 col-md-offset-3">
+    @using (Html.BeginForm("Entrar", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">Login</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-2">Login:</div>
+                    <div class="col-md-10"><input type="text" id="Login" name="Usuario.Login" class="form-control" /></div>
+                </div><br />
+                <div class="row">
+                    <div class="col-md-2">Senha:</div>
+                    <div class="col-md-10"><input type="password" id="Senha" name="Usuario.Senha" class="form-control" /></div>
+                </div><br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                        @*<button type="button" class="btn btn-default">Quero que cadastrar</button>*@
+                        @Html.ActionLink("Quero me cadastradar", "Novo", "Usuarios", new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+}

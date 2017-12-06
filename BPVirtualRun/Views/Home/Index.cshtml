@@ -1,0 +1,133 @@
+﻿@model List<BPVirtualRun.Models.Campanha>
+@{
+    ViewBag.Title = "Corrida Virtual do Beach Park";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+<div class="slider_wrapper">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="~/imagens/slide.jpg" alt="...">
+                <div class="carousel-caption">
+                    Suerando desafios...
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/imagens/slide1.jpg" alt="...">
+                <div class="carousel-caption">
+                    Ajudando o próximo...
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/imagens/slide2.jpg" alt="...">
+                <div class="carousel-caption">
+                    Cuidado da saúde...
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="center">Corrida Virtual Beach Park</h2><br clear="all" /><br clear="all" />
+        <h3>Corridas disponíveis</h3><br clear="all" />
+        <div class="count_wrap">
+            @foreach(var c in Model)
+            {
+                <div class="panel panel-default">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>@c.Nome</h3>
+                            Inscrições até @c.FimInscricao.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Modalidades</h4>
+                            @if (c.is5KM)
+                            { <span>5KM</span> }
+                            @if (c.is10KM)
+                            { <span>10KM</span> }
+                            @if (c.is15KM)
+                            { <span>15KM</span> }
+                            <br />
+                            @*@Html.ActionLink("Quero Participar!", "Index", "Usuarios", new { @class = "btn-link" })*@
+                            <button type="button" class="btn btn-sm btn-success" onclick="redirecionar();">Quero Participar</button>
+                            <br clear="all"/>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <br clear="all" /><br clear="all" />
+        <h3>Patrocinadores</h3><br clear="all" />
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title center">INCOR</h3>
+                </div>
+                <div class="panel-body center"  style="min-height:350px">
+                    <img src="~/imagens/logoIncor123.png" style="center" /><br />
+                    O Instituto do Coração da Criança e do Adolescente é uma instituição sem fins lucrativos, fundado em 12 de outubro de 2003, em Fortaleza - CE, é credenciado ao Ministério da Saúde desde abril de 2004.
+                </div>
+                <div class="panel-footer">
+                    <a href="http://www.incorcrianca.org.br" target="_blank">Visitar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading center">
+                    <h3 class="panel-title center">BEACH PARK</h3>
+                </div>
+                <div class="panel-body center" style="min-height:350px">
+                    <img src="~/imagens/logoBP.jpg" style="max-width:123px" /><br />
+                    O complexo Beach Park é um dos principais pontos turísticos de Fortaleza e garante diversão para pessoas de todas as idades. O parque tem diversas piscinas, brinquedos e toboáguas - os atrativos têm vários níveis de aventura, desde as mais leves (para as crianças) às mais radicais, para os que não temem altura e rodopios em cima de uma boia
+                </div>
+                <div class="panel-footer">
+                    <a href="http://www.beachpark.com.br" target="_blank">Visitar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title center">IVIA</h3>
+                </div>
+                <div class="panel-body center"  style="min-height:350px">
+                    <img src="~/imagens/logoIvia123.png" style="center" /><br />
+                    A IVIA é uma empresa especializada em tecnologia da informação que desenvolve soluções que facilitem e ampliem os negócios de seus clientes, seja através da redução de custos, aumento de produtividade ou na geração de inovação
+                </div>
+                <div class="panel-footer">
+                    <a href="http://www.ivia.com.br" target="_blank">Visitar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function redirecionar()
+        {
+            window.location.href = "@Url.Action("Index", "Usuarios")";
+        }
+    </script>   
+}

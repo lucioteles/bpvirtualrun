@@ -1,0 +1,72 @@
+﻿@model BPVirtualRun.Models.Campanha
+@{
+    ViewBag.Title = "Nova";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">*@
+            @using (Html.BeginForm("Salvar", "Campanhas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <h2 class="center">Campanha</h2>
+                <br clear="all" />
+                <div class="row">
+                    <div class="col-md-2">Nome</div>
+                    <div class="col-md-10"><input type="text" name="Nome" class="form-control" /></div>
+                </div>
+                <br clear="all" />
+                <div class="row">
+                    <h4 class="center">Período Inscrição:</h4><br clear="" all" />
+                </div>
+                <div class="row">
+                    <div class="col-md-2">Início:</div>
+                    <div class="col-md-4"><input type="date" name="InicioInscricao" class="form-control" /></div>
+                    <div class="col-md-2">Fim:</div>
+                    <div class="col-md-4"><input type="date" name="FimInscricao" class="form-control" /></div>
+                </div><br clear="all" />
+                <div class="row">
+                    <h4 class="center">Quantidade de Inscritos:</h4><br clear="all" />
+                </div>
+                <div class="row">
+                    <div class="col-md-2">Mínima:</div>
+                    <div class="col-md-4"><input type="number" name="MinimoInscritos" class="form-control" /></div>
+                    <div class="col-md-2">Máximo:</div>
+                    <div class="col-md-4"><input type="number" name="MaximoInscritos" class="form-control" /></div>
+                </div>
+                <br clear="all" />
+                <div class="row">
+                    <div class="col-md-2">Distâncias:</div>
+                    <div class="col-md-10">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                @*<input type="checkbox" name="is5KM" id="is5KM" checked />5KM*@
+                                @Html.CheckBoxFor(x => x.is5KM, htmlAttributes: new { @checked = true })5KM
+                            </label>
+                            <label class="btn btn-primary">
+                                @*<input type="checkbox" name="is10KM" id="is10KM" /> 10KM*@
+                                @Html.CheckBoxFor(x => x.is10KM, htmlAttributes: new { @checked = true })10KM
+                            </label>
+                            <label class="btn btn-primary">
+                                @*<input type="checkbox" name="is15KM" id="is15KM" /> 15KM*@
+                                @Html.CheckBoxFor(x => x.is15KM, htmlAttributes: new { @checked = true })15KM
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br clear="all" />
+                <div class="row">
+                    <div class="col-md-2">Valor</div>
+                    <div class="col-md-4"><input type="number" name="ValorInscricao" class="form-control" /></div>
+                </div>
+                <br clear="all" />
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-default">Salvar</button>
+                    </div>
+                </div>
+            }
+
+        @*</div>
+    </div>
+</div>*@

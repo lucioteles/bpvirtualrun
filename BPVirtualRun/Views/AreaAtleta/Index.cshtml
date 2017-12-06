@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Área do Atleta";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Desconectar", "Desconectar", "Usuarios")</li>
+        </ol>
+        @if (ViewData["Erro"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>@ViewData["Erro"]</div>
+        }
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body" style="background-image: url('../../imagens/corridasAtivas.jpg'); background-size: auto; background-repeat:no-repeat">
+                    <br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" />
+                </div>
+                <div class="panel-footer">
+                    @*<a href="#" class="btn-link">Ver mais</a>*@
+                    @Html.ActionLink("Ver mais", "CorridasAtivas", "AreaAtleta", new { @class = "btn-link" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body" style="background-image: url('../../imagens/minhascorridas.jpg'); background-size: cover; background-repeat:no-repeat">
+                    <br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" /><br clear="all" />
+                </div>
+                <div class="panel-footer">
+                    @Html.ActionLink("Ver mais", "MinhasCorridas", "AreaAtleta",  new { @class= "btn-link" })
+                    @*<a href="#" class="btn-link">Ver mais</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

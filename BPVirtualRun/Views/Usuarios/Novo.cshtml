@@ -1,0 +1,104 @@
+﻿@model BPVirtualRun.Models.ViewModels.AtletaVM
+@{
+    ViewBag.Title = "Novo";
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+@using (Html.BeginForm("Novo", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">Nome:</div>
+            <div class="col-md-4"><input type="text" class="form-control" name="Atleta.Nome" /></div>
+            <div class="col-md-2">Sexo:</div>
+            <div class="col-md-4">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+                        @*<input type="radio" name="Atleta.sexo" id="sexoM" autocomplete="off" checked> Masculino*@
+                        <label>@Html.RadioButtonFor(x => x.Atleta.Sexo, "M", new { @checked = true })Masculino</label>
+                    </label>
+                    <label class="btn btn-primary">
+                        @*<input type="radio" name="Atleta.sexo" id="sexoF" autocomplete="off"> Feminino*@
+                        <label>@Html.RadioButtonFor(x => x.Atleta.Sexo, "F")Feminino</label>
+                    </label>
+                </div>
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-2">Telefone:</div>
+            <div class="col-md-4"><input type="tel" class="form-control" name="Atleta.Telefone" /></div>
+            <div class="col-md-2">E-mail:</div>
+            <div class="col-md-4"><input type="email" class="form-control" name="Atleta.Email" /></div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-2">Nascimento:</div>
+            <div class="col-md-4"><input type="date" class="form-control" name="Atleta.DataNascimento" /></div>
+            <div class="col-md-2">CEP:</div>
+            <div class="col-md-4"><input type="number" class="form-control" name="Atleta.Cep" id="cep" maxlength="8" /></div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-2">Endereço:</div>
+            <div class="col-md-10"><input type="text" class="form-control" name="Atleta.Logradouro" id="endereco" readonly /></div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-2">Complemento:</div>
+            <div class="col-md-4"><input type="text" class="form-control" name="Atleta.Complemento" /></div>
+            <div class="col-md-2">Número:</div>
+            <div class="col-md-4"><input type="text" class="form-control" name="Atleta.Numero" id="numero" /></div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-2">Bairro:</div>
+            <div class="col-md-4"><input type="text" class="form-control" name="Atleta.Bairro" id="bairro" readonly /></div>
+            <div class="col-md-2">Cidade:</div>
+            <div class="col-md-4"><input type="text" class="form-control" name="Atleta.Cidade" id="cidade" readonly /></div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-2">Estado:</div>
+            <div class="col-md-4"><input type="text" class="form-control" name="Atleta.UF" id="uf" readonly /></div>
+        </div><br />
+        <hr />
+        <div class="row">
+            <div class="col-md-2">Login:</div>
+            <div class="col-md-4"><input type="text" class="form-control" name="Usuario.Login" /></div>
+            <div class="col-md-2">Senha:</div>
+            <div class="col-md-4"><input type="password" class="form-control" name="Usuario.Senha" /></div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-lg btn-primary pull-right">Salvar</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#cep").keyup(function () {
+                var tam = $("#cep").val().length;
+                if (tam == 8)
+                {
+                    var cep = $("#cep").val();
+                    var url = "http://viacep.com.br/ws/" + cep + "/json";
+
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        success: function (items) {
+                            console.log(items);
+                            $("#endereco").val(items.logradouro);
+                            $("#bairro").val(items.bairro);
+                            $("#cidade").val(items.localidade);
+                            $("#uf").val(items.uf);
+                        },
+                        failure: function (response) {
+                            exibirModal("ERRO!", response);
+                            //pararCarregando();
+                        }
+                    });
+                }
+            })
+        });
+</script>      
+}

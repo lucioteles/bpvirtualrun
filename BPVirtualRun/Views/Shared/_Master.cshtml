@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Corrida Virtual Beach Park</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="page1" id="top">
+    <div class="main">
+        <!--==============================header=================================-->
+        <header>
+            <div class="container_12">
+                <div class="grid_12">
+                    <h1>
+                        <a href="index.html">
+                            <img src="imagens/logoP.png" alt="Corrida Virtual Beach Park">
+                        </a>
+                    </h1>
+                    <div class="menu_block">
+                        <nav class="horizontal-nav full-width horizontalNav-notprocessed">
+                            <ul class="sf-menu">
+                                <li class="current">@Html.ActionLink("Home", "Index", "Home")</li>
+                                @*<li>@Html.ActionLink("Inscrição", "Index", "Usuarios")</li>*@
+                                <li>@Html.ActionLink("Área do Atleta", "Index", "Usuarios")</li>
+                                <li>@Html.ActionLink("Premiações", "Premios", "Home")</li>
+                                @*<li><a href="index-2.html">Corridas</a></li>
+                                    <li><a href="index-3.html">Sobre</a></li>*@
+                                <li>@Html.ActionLink("Contato", "Index", "Contato")</li>
+                                <li>@Html.ActionLink("Área Restrita", "Index", "Admin")</li>
+                            </ul>
+                        </nav>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </header>
+        @*<div class="slider_wrapper">
+                <div id="camera_wrap" class="">
+                    <div data-src="images/slide.jpg">
+                        <div class="caption fadeIn">
+                            Run for Your Health
+                        </div>
+                    </div>
+                    <div data-src="images/slide1.jpg">
+                        <div class="caption fadeIn">
+                            Fast as Wind
+                        </div>
+                    </div>
+                    <div data-src="images/slide2.jpg">
+                        <div class="caption fadeIn">
+                            Never Stop
+                        </div>
+                    </div>
+                </div>
+            </div>*@    
+        <!--==============================Content=================================-->
+        @*<div class="content">
+                <div class="ic"></div>
+                <div class="container_12">
+                    @RenderBody()
+                </div>
+            </div>*@
+    </div>
+
+    <div class="content" style="background-color:white">
+        <br clear="all" />
+        <div class="row">
+            <div class="col-md-12">
+                @*<div class="col-md-6 col-md-offset-3">*@
+                @*<div class="col-md-10 col-md-offset-1">*@
+                    <br clear="all" />
+                    @RenderBody()
+                @*</div>*@
+            </div>
+        </div>
+
+        <hr />
+        <br clear="all" /><br clear="all" />
+    </div>
+    <div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Corrida Virtual Beach Park</p>
+        </footer>
+    </div>
+
+    <div id="mensagens" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="titulo">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="titulo">Modal title</h4>
+                </div>
+                <div class="modal-body" id="mensagem">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('.carousel').carousel();
+        //    jQuery('#camera_wrap').camera({
+        //    loader: false,
+        //    pagination: false,
+        //    minHeight: '444',
+        //    thumbnails: false,
+        //    height: '27.86458333333333%',
+        //    caption: true,
+        //    navigation: true,
+        //    fx: 'simpleFade'
+        //});
+        //$().UItoTop({ easingType: 'easeOutQuart' });
+    })
+
+
+    function exibirModal(titulo, mensagem) {
+        $('#titulo').html("");
+        $('#titulo').html(titulo);
+
+        $('#mensagem').html("");
+        $('#mensagem').html(mensagem);
+
+        $('#mensagens').modal('show');
+    }
+</script>
